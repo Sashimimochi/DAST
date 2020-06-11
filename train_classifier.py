@@ -27,7 +27,7 @@ if __name__ == '__main__':
     args = load_arguments()
 
     if not os.path.isfile(args.vocab):
-        build_vocab(args.train_path, args.vocab)
+        build_vocab(args.train_path, args.vocab, args.lang)
     vocab = Vocabulary(args.vocab)
     print('vocabulary size', vocab.size)
 

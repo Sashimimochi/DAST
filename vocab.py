@@ -12,7 +12,10 @@ import numpy as np
 from numpy import linalg as LA
 import pickle
 
+from databuilder.ja_tokenizer import Tokenizer
+
 logger = logging.getLogger(__name__)
+ja_tokenizer = Tokenizer()
 
 class Vocabulary(object):
     def __init__(self, vocab_file, dim_emb=0):
@@ -31,7 +34,7 @@ class Vocabulary(object):
           raise ValueError('Id not found in vocab: %d' % word_id)
         return self._id2word[word_id]
 
-def build_vocab(data_path, save_path, min_occur=1):
+def build_vocab(data_path, save_path, min_occur=1, lang='en'):
     word2id = {'<pad>':0, '<go>':1, '<eos>':2, '<unk>':3}
     id2word = ['<pad>', '<go>', '<eos>', '<unk>']
     words = []
@@ -46,7 +49,10 @@ def build_vocab(data_path, save_path, min_occur=1):
                 dict_example = json.loads(string_)
                 sent = dict_example["review"]
                 # ipdb.set_trace()
-                words += sent.split()
+                if lang == 'ja':
+                    words += ja_tokenizer.tokenize(sent)
+                else:
+                    words += sent.split()
 
     cnt = Counter(words)
     for word in cnt:
@@ -85,7 +91,7 @@ def build_vocab(data_path, save_path, min_occur=1):
 #     with open(save_path, 'wb') as f:
 #         pickle.dump((vocab_size, word2id, id2word), f, pickle.HIGHEST_PROTOCOL)
 
-def build_unify_vocab(datapaths, save_path, min_occur=2):
+def build_unify_vocab(datapaths, save_path, min_occur=2, lang='en'):
     word2id = {'<pad>':0, '<go>':1, '<eos>':2, '<unk>':3}
     id2word = ['<pad>', '<go>', '<eos>', '<unk>']
     words = []
@@ -102,10 +108,18 @@ def build_unify_vocab(datapaths, save_path, min_occur=2):
                     dict_example = json.loads(string_)
                     sent = dict_example["review"]
                     # ipdb.set_trace()
-                    words += sent.split()
+                    if lang == 'ja':
+                        words += ja_tokenizer.tokenize(sent)
+                    else:
+                        words += sent.split()
+
                     if 'target' in data_path:
-                        for word in sent.split():
-                            target_word_set.add(word)
+                        if lang == 'ja':
+                            for word in ja_tokenizer.tokenize(sent):
+                                target_word_set.add(word)
+                        else:
+                            for word in sent.split():
+                                target_word_set.add(word)
 
     cnt = Counter(words)
     for word in cnt:

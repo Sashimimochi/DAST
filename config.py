@@ -144,6 +144,12 @@ def load_arguments():
             action='store_true',
             help='whether to save validation samples from the model.')
 
+    # Language type
+    argparser.add_argument('--lang',
+            type=str,
+            default='en',
+            choices=['en', 'ja'],
+            help='select language type')
 
     args = argparser.parse_args()
     # check whether use online annotated dataset from human
