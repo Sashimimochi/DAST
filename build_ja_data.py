@@ -62,10 +62,16 @@ def main():
                         default="ja",
                         help="language"
                         )
+    parser.add_argument("--skip_domain_concat",
+                        type=int,
+                        default=0,
+                        help="skip domain concat flag (skip:1, no skip:0)"
+                        )
 
     opt = parser.parse_args()
 
-    MakeJaDataset().build_ja_data()
+    if opt.skip_domain_concat == 0:
+        MakeJaDataset().build_ja_data()
 
     data_processor = DataProcessor(
         opt.positive_review_stars_limit,

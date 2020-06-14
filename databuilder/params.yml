@@ -1,8 +1,8 @@
-"TMP_DATA_DIR": "data/tmp/"
+"TMP_DATA_DIR": "data/rakuren_ja/"
 "DATA_FOLDER": "data/mydata"
 "DATA_DOMAIN_A": "domain_a.txt"
 "DATA_DOMAIN_B": "domain_b.txt"
-"TMP_DATA": "mydata.json"
+"TMP_DATA": "rakuten_reviews.json"
 "TRAIN_TYPE": 0
 "TEST_TYPE": 1
 "VALIDATION_TYPE": 2
