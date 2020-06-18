@@ -1,8 +1,8 @@
-"TMP_DATA_DIR": "data/rakuren_ja/"
-"DATA_FOLDER": "data/mydata"
-"DATA_DOMAIN_A": "domain_a.txt"
-"DATA_DOMAIN_B": "domain_b.txt"
-"TMP_DATA": "rakuten_reviews.json"
+"TMP_DATA_DIR": "data/rakuren_ja/" #directory put temporary data
+"DATA_FOLDER": "data/mydata" #output directory
+"DATA_DOMAIN_A": "domain_a.txt" #input filename
+"DATA_DOMAIN_B": "domain_b.txt" #input filename
+"TMP_DATA": "rakuten_reviews.json" #temporary filename
 "TRAIN_TYPE": 0
 "TEST_TYPE": 1
 "VALIDATION_TYPE": 2
